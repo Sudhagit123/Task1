@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SudokuBoard from './components/SudokuBoard';
+import { isValidSudoku } from './utils/validateBoard';
+import { solveSudoku } from './utils/solveSudoku';
 
-function App() {
+const App = () => {
+  const [board, setBoard] = useState(Array(9).fill(Array(9).fill('')));
+  const [message, setMessage] = useState('');
+
+  const handleSolve = () => {
+    if (isValidSudoku(board)) {
+      const solvedBoard = solveSudoku(board);
+      setBoard(solvedBoard);
+      setMessage('Sudoku solved!');
+    } else {
+      setMessage('Invalid Sudoku configuration.');
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Sudoku Solver</h1>
+      <SudokuBoard board={board} setBoard={setBoard} />
+      <button onClick={handleSolve}>Solve</button>
+      <p>{message}</p>
     </div>
   );
-}
+};
 
 export default App;

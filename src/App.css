@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,21 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+}
+
+.sudoku-row {
+  display: contents;
+}
+
+.sudoku-board input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
 }
